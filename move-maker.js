@@ -32,5 +32,11 @@ function validateMove(move, board) {
             - Return true
 */
 export function makeMove(board, move, player) {
-    return false;
-}
+
+    let cordinates = move.split(',')
+    let cordinatesX = cordinates[0]
+    let cordinatesY = cordinates[1]
+
+    board[cordinatesX][cordinatesY] = player
+    return true;
+    }

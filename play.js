@@ -10,7 +10,7 @@ async function playGame() {
     let moveNumber = 0;
 
     const board = [
-        ['_', '_', '_'],
+        ['_0', '_', '_'],
         ['_', '_', '_'],
         ['_', '_', '_']
     ];
@@ -22,8 +22,8 @@ async function playGame() {
         do {
             move = await getMove(player);
         } while(!makeMove(board, move, player));
-
-        printBoard(board);
+console.log(board);
+        // printBoard(board);
         moveNumber++;
     }
 }
