@@ -16,6 +16,14 @@
     Test your function by calling it with an example tic-tac-toe board.
 */
 export function printBoard(board) {
+  const arr = board.map((x) => x.map((y) => `  ${y}  `));
+  const lineLength = arr[0].toString().length;
+  for (let k = 0; k < arr.length; k++) {
+    if (k % 2 === 1) {
+      arr.splice(k, 0, '='.repeat(lineLength));
+    }
+    console.log(arr[k].toString().replaceAll('_', ' ').replaceAll(',', '|'));
+  }
 }
 
 /*
@@ -24,4 +32,13 @@ export function printBoard(board) {
         - return false if there are still moves that can be made
 */
 export function checkIfNoMovesLeft(board) {
+  let underLine = 0;
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] === '_') {
+        underLine++;
+      }
+    }
+  }
+  return !Boolean(underLine);
 }

@@ -16,8 +16,31 @@
         ];
 */
 function validateMove(move, board) {
-    // Implement this at the end if you have time, otherwise you can help your teammates!
+  // Implement this at the end if you have time, otherwise you can help your teammates!
+  const getSplitedArray = move.split(',');
+
+  const moveIncludesComma = move.includes(',');
+  const checkIfArrayLengthTwo = getSplitedArray.length === 2;
+
+  const checkFirstValue = getSplitedArray[0] >= 1 && getSplitedArray[0] <= 3;
+  const checkSecondValue = getSplitedArray[1] >= 1 && getSplitedArray[1] <= 3;
+  const ifMoveValid = checkFirstValue && checkSecondValue;
+
+  const isUnderLineOnBoard =
+    board[Math.max(getSplitedArray[0] - 1, 0)][
+      Math.max(getSplitedArray[1] - 1, 0)
+    ] === '_';
+  if (
+    moveIncludesComma &&
+    checkIfArrayLengthTwo &&
+    ifMoveValid &&
+    isUnderLineOnBoard
+  ) {
     return true;
+  } else {
+    console.log('Try again...');
+    return false;
+  }
 }
 
 /*
@@ -32,5 +55,12 @@ function validateMove(move, board) {
             - Return true
 */
 export function makeMove(board, move, player) {
-    return false;
+  const checkValid = validateMove(move, board);
+
+  if (checkValid) {
+    const [i, j] = move.split(',').map((x) => +x);
+    board[i - 1][j - 1] = player;
+    return true;
+  }
+  return false;
 }
