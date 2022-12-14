@@ -18,12 +18,14 @@
 export function printBoard(board) {
   const arr = board.map((x) => x.map((y) => `  ${y}  `));
   const lineLength = arr[0].toString().length;
-  for (let k = 0; k < arr.length; k++) {
+  for (let k = 0; k < arr.length + 1; k++) {
     if (k % 2 === 1) {
       arr.splice(k, 0, '='.repeat(lineLength));
     }
-    console.log(arr[k].toString().replaceAll('_', ' ').replaceAll(',', '|'));
   }
+  arr.forEach((x) =>
+    console.log(x.toString().replaceAll('_', ' ').replaceAll(',', '|'))
+  );
 }
 
 /*
