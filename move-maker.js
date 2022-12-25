@@ -16,27 +16,27 @@
         ];
 */
 function validateMove(move, board) {
-  // Implement this at the end if you have time, otherwise you can help your teammates!
-  const getSplitedArray = move.split(',');
+  const checkIfMoveIncludesComma = move[1] === ',';
 
-  const moveIncludesComma = move.includes(',');
-  const checkIfArrayLengthTwo = getSplitedArray.length === 2;
+  const validNum = ['1', '2', '3'];
+  const checkFirstValue = validNum.some((x) => x === move[0]);
+  const checkSecondValue = validNum.some((x) => x === move[2]);
 
-  const checkFirstValue = getSplitedArray[0] >= 1 && getSplitedArray[0] <= 3;
-  const checkSecondValue = getSplitedArray[1] >= 1 && getSplitedArray[1] <= 3;
-  const ifMoveValid = checkFirstValue && checkSecondValue;
-
-  const isUnderLineOnBoard =
-    board[Math.max(getSplitedArray[0] - 1, 0)][
-      Math.max(getSplitedArray[1] - 1, 0)
-    ] === '_';
   if (
-    moveIncludesComma &&
-    checkIfArrayLengthTwo &&
-    ifMoveValid &&
-    isUnderLineOnBoard
+    move.length === 3 &&
+    checkIfMoveIncludesComma &&
+    checkFirstValue &&
+    checkSecondValue
   ) {
-    return true;
+    const row = move[0];
+    const col = move[2];
+    const checkIfIsUnderLine = board[row - 1][col - 1] === '_';
+    if (checkIfIsUnderLine) {
+      return true;
+    } else {
+      console.log('Try again...');
+      return false;
+    }
   } else {
     console.log('Try again...');
     return false;
